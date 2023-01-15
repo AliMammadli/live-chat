@@ -1,38 +1,66 @@
 {
-  "name": "live-chat",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "live-chat",
+    "version": "0.1.0",
+    "private": true,
+    "description": "Live chat app for presentation",
+    "author": "Ali Mammadli",
+    "dependencies": {
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-scripts": "5.0.1",
+        "web-vitals": "^2.1.4"
+    },
+    "main": "./public/electron.js",
+    "homepage": "./",
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "electron:start": "wait-on http://127.0.0.1:3000 && electron .",
+        "electron:serve": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm run electron:start\"",
+        "electron:bld": "npm run build && electron-builder",
+        "electron:build": "npm run build && electron-builder -c.extraMetadata.main=build/electron.js"
+    },
+    "build": {
+        "appId": "com.electron.livechat",
+        "files": ["node_modules/**/*"],
+        "win": {
+            "target": ["zip", "msi"]
+        },
+        "nsis": {
+			"differentialPackage": false
+		},
+		"dmg": {
+			"writeUpdateInfo": false
+		}
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "concurrently": "^7.6.0",
+        "cross-env": "^7.0.3",
+        "electron": "^22.0.1",
+        "electron-builder": "^23.6.0",
+        "wait-on": "^7.0.1"
+    }
 }
