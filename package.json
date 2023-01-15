@@ -27,16 +27,23 @@
     },
     "build": {
         "appId": "com.electron.livechat",
-        "files": ["node_modules/**/*"],
+        "files": [
+            "node_modules/**/*",
+            "**/node_modules/*"
+        ],
+        "includeSubNodeModules": false,
         "win": {
-            "target": ["zip", "msi"]
+            "target": [
+                "zip",
+                "msi"
+            ]
         },
         "nsis": {
-			"differentialPackage": false
-		},
-		"dmg": {
-			"writeUpdateInfo": false
-		}
+            "differentialPackage": false
+        },
+        "dmg": {
+            "writeUpdateInfo": false
+        }
     },
     "eslintConfig": {
         "extends": [
